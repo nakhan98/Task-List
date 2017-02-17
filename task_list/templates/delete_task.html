@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Add Task{% endblock %}
+{% block body_block %}
+<p>Task deleted!</p>
+<a href="/task_list">Go to task list (will redirect automatically in 2 seconds)</a>
+<script>
+// Redirect after 2 seconds
+$(document).ready(function() {
+  window.setTimeout(function() {
+    location.href = "/task_list/";
+  }, 2000);
+});
+</script>
+{% endblock %}
+

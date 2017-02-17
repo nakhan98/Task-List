@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}All Tasks{% endblock %}
+{% block body_block %}
+<script>
+$(document).ready(function() {
+  close_task();
+  delete_task();
+  hide_completed_tasks();
+});
+
+// Hide completed button (redirect to url)
+function hide_completed_tasks() {
+  $(".hide-completed").click(function(e) {
+      window.location.href = "/task_list/?hide_completed=1"
+  }); 
+}
+
+// Delete a task
+function delete_task(){
+  $("span.delete-task").click(function(e) {
+    e.preventDefault();
+    var delete_task = confirm("Are you sure you want to delete this task?");
+    if (delete_task) {
+      var task_id = $(this).attr("data-task-id");
+      var delete_url = "/task_list/delete_task/" + task_id;
+      console.log("Delete task url: " + delete_url);
+      window.location.href = delete_url;
+    }
+  });
+}
+
+// Close a task
+function close_task(){
+  $("span.status").click(function(e) {
+    e.preventDefault();
+    var task_id = $(this).attr("data-task-id");
+    var close_url = "/task_list/close_task/" + task_id;
+    console.log("Close task url: " + close_url);
+    window.location.href = close_url;
+  });
+
+  $("span.status_done").click(function(e) {
+    e.preventDefault();
+  });
+}
+</script>
+
+<div class="container" style="width:450px; margin-left:0">
+  <div style="margin-left:340px; padding-bottom:3px">
+    <a href="/task_list/add_task">Add task <span class="glyphicon glyphicon-plus">
+    </span></a>
+  </div>
+
+  {% for user_task_dict in user_tasks %}
+  <!-- User title -->
+  <a href="#" class="list-group-item active">
+    <span class="glyphicon glyphicon-user"></span>
+    {{user_task_dict.user}}
+  </a>
+
+  <!-- Tasks -->
+  {% if user_task_dict.tasks %}
+  {% for task in user_task_dict.tasks %}
+  <!-- This is to add clickable edit and delete glyphs and a clickable badge to close a task -->
+  <a title="Edit task" href="/task_list/edit_task/{{task.id}}" class="list-group-item">
+    <span class="glyphicon glyphicon-file"></span>
+    {{task.title}}
+    
+    {% if not task.is_done %}
+    <span style="float: right" title="Mark done" data-task-id="{{task.id}}" class="badge status">
+      Not Done
+    </span>
+    
+    {% else %}
+    <span title="Task closed by {{task.status_changed_by}}"
+    data-task-id="{{task.id}}" class="badge status_done">
+      Done
+    </span>
+    {% endif %}
+
+    <!-- Delete and edit symbols (only show if tasks were created by active user) -->
+    {% if task.user == user %}
+    <span title="Delete task" style="float: right; padding-right:5px"
+      class="glyphicon glyphicon-remove delete-task"
+      data-task-id="{{task.id}}">
+    </span>
+    <span style="float: right; padding-right:5px" class="glyphicon glyphicon-pencil edit_task"
+      data-task-id="{{task.id}}">
+    </span>
+    {% endif %}
+
+  </a>
+  {% endfor %}
+
+  <!-- No saved tasks -->
+  {% else %}
+  <a href="#" class="list-group-item">No saved tasks</a>
+  {% endif%}
+  <br />
+  {% endfor %}
+
+  {% if not filter_completed %}
+  <button class="btn btn-default hide-completed">Hide Completed Tasks</button>
+  {% endif %}
+</div>
+{% endblock %}
