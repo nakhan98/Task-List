@@ -36,8 +36,7 @@ class TaskTestCase(TestCase):
         response = self.client.post("/task_list/login/",
                                     {"username": "abc", "password": "xyz"})
         self.assertEquals(response.status_code, 401, "Unexpected status code")
-        self.assertEquals(response.content, "Login failed!",
-                          "Unexpected content")
+        self.assertIn("Login failed!", response.content, "Unexpected content")
 
     def test_login_ok(self):
         """Test login functionality (success)"""

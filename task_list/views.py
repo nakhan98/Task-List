@@ -53,7 +53,7 @@ def task_list(request):
 
 def about(request):
     """About page"""
-    return render(request, "about.html", {})
+    return render(request, "about.html")
 
 
 def register_user(request):
@@ -99,10 +99,10 @@ def login_user(request):
                                     "the site administrator.")
         else:
             print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponse("Login failed!", status=401)
+            return render(request, "login_fail.html", status=401)
 
     else:
-        return render(request, "login.html", {})
+        return render(request, "login.html")
 
 
 @login_required
@@ -192,4 +192,4 @@ def delete_task(request, task_id):
     if current_user != saved_task.user:
         raise PermissionDenied
     saved_task.delete()
-    return render(request, "delete_task.html", {})
+    return render(request, "delete_task.html")
