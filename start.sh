@@ -20,7 +20,7 @@ echo "Creating and starting container..."
 sudo docker run -d --name $CONTAINER_NAME \
     -m $MEMORY \
     --log-opt max-size=$MAX_LOG_SIZE \
-    -v $(realpath task_list):/home/tester/task_list/ \
+    -v $(realpath src):/home/tester/task_list/ \
     -p 127.0.0.1:48080:8000 \
     $IMAGE_NAME
     # -it $IMAGE_NAME bash

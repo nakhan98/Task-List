@@ -19,7 +19,7 @@ ENV LC_ALL en_GB.UTF-8
 
 USER tester
 WORKDIR /home/tester
-COPY task_list /home/tester/task_list/
+COPY src/ /home/tester/task_list/
 COPY requirements.txt .
 RUN virtualenv django_env
 RUN django_env/bin/pip install -r ~/requirements.txt
