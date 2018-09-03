@@ -2,3 +2,4 @@
 *.sqlite3
 .*.sw*
 *.pyc
+src/task_list_project/secret_settings.py

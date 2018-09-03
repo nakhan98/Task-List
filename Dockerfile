@@ -2,11 +2,10 @@ FROM debian:latest
 RUN useradd -ms /bin/bash -u1000 tester
 
 RUN apt-get update && apt-get upgrade -y && apt-get clean -y
-RUN apt-get install sudo aptitude bash-completion locales \
-    virtualenv python wget git -y
+RUN apt-get install sudo bash-completion locales \
+    virtualenv python wget git python-dev build-essential -y && \
+    apt-get clean
 RUN echo 'tester ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-RUN aptitude clean
-
 
 # See: https://hub.docker.com/r/pfcarrier/debian-locale/builds/biksnydxmevjscmbkbclu6c/
 # https://github.com/moby/moby/issues/4032
@@ -26,6 +25,6 @@ RUN django_env/bin/pip install -r ~/requirements.txt
 # RUN /home/tester/django_env/bin/python task_list/manage.py migrate
 # CMD ["/home/tester/django_env/bin/python", "task_list/manage.py", "runserver"]
 CMD /home/tester/django_env/bin/python task_list/manage.py migrate && \
-    /home/tester/django_env/bin/python task_list/manage.py runserver 0.0.0.0:8000
+    /home/tester/django_env/bin/uwsgi --ini task_list/task_list_uwsgi.ini
 
-EXPOSE 8000
+EXPOSE 48080

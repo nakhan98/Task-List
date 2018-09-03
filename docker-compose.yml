@@ -1,0 +1,22 @@
+version: "2"
+services:
+
+    nginx:
+        image: nginx:alpine
+        ports:
+            - "8443:8443"
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/task_list.conf:ro
+            - /home/nasef/docker_stuff/lets_encrypt/certs:/etc/letsencrypt/
+
+    task-list:
+        build:
+            context: .
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet:  172.19.0.0/16
