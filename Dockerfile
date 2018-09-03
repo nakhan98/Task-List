@@ -17,19 +17,15 @@ RUN echo "en_GB.UTF-8 UTF-8" > /etc/locale.gen && \
     DEBIAN_FRONTEND=noninteractive /usr/sbin/update-locale LANG=en_GB.UTF-8
 ENV LC_ALL en_GB.UTF-8
 
-# COPY .vimrc /home/tester/
-# COPY .vim/ /home/tester/.vim/
-# RUN chown -Rv tester:tester /home/tester/.vim*
-
 USER tester
 WORKDIR /home/tester
 COPY task_list /home/tester/task_list/
+COPY requirements.txt .
 RUN virtualenv django_env
-RUN django_env/bin/pip install -r ~/task_list/requirements.txt
+RUN django_env/bin/pip install -r ~/requirements.txt
 # RUN /home/tester/django_env/bin/python task_list/manage.py migrate
 # CMD ["/home/tester/django_env/bin/python", "task_list/manage.py", "runserver"]
 CMD /home/tester/django_env/bin/python task_list/manage.py migrate && \
     /home/tester/django_env/bin/python task_list/manage.py runserver 0.0.0.0:8000
-
 
 EXPOSE 8000

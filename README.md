@@ -1,12 +1,12 @@
 Task List App
 -------------
 
+A coding test I did a while back. Puting it her for posterity.
+
 General info
 ============
 - Developed on Debian Jessie with Python 2.7.9 and Django (1.7.11).
 - Bootstrap and jQuery used for front end.
-- Had to use old django version in Debian repositories as had rubbish internet
-  connection on holiday.
 
 Setup
 =====
@@ -15,6 +15,12 @@ Setup
 - Run dev server: ```python manage.py runserver```.
 - Browse to http://localhost:8000/task_list/ .
 - To run tests: ```python manage.py test -v2```.
+
+Docker
+=====
+- Alternatively, run `start.sh` which dockerifies everything.
+    - By default, app will listen on port 48080.
+
 
 Instructions
 ============
