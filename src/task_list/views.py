@@ -113,7 +113,6 @@ def add_task(request):
     if request.method == "POST":
         task_form = AddTaskForm(data=request.POST)
         if task_form.is_valid():
-            import ipdb; ipdb.set_trace()
             task = task_form.save(commit=False)
             task.user = request.user
             task.save()
@@ -151,7 +150,6 @@ def edit_task(request, task_id):
             task = task_form.save(commit=False)
             # Get radio button values from POST data as we're re-using the
             # AddTaskForm
-            import ipdb; ipdb.set_trace()
             task.is_done = True if int(request.POST["task_status"]) else False
             task.is_hidden = True if not int(request.POST["is_hidden"]) else False
             task.save()
