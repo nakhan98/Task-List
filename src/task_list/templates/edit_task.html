@@ -49,6 +49,26 @@ $(document).ready(function() {
     </div>
     {% endif %}
 
+    <div></div>
+
+    {% if task.is_hidden %}
+    <div class="radio">
+      <label><input type="radio" name="is_hidden" value="0">Visible to others</label>
+    </div>
+
+    <div class="radio">
+      <label><input type="radio" name="is_hidden" value="1" checked="checked">Invisible to others</label>
+    </div>
+    {%else %}
+    <div class="radio">
+      <label><input type="radio" name="is_hidden" value="0" checked="checked">Visible to others</label>
+    </div>
+
+    <div class="radio">
+      <label><input type="radio" name="is_hidden" value="1">Invisible to others</label>
+    </div>
+    {% endif %}
+
     {% if form_errors %}
     <p>{{form_errors}}</p>
     {% endif %}

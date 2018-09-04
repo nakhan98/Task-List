@@ -43,10 +43,10 @@ def task_list(request):
 
         if filter_completed:
             user_tasks.append({"user": user, "tasks": Task.objects
-                               .filter(user=user, is_done=False)})
+                               .filter(user=user, is_done=False, is_hidden=False)})
         else:
             user_tasks.append({"user": user, "tasks": Task.objects
-                               .filter(user=user)})
+                               .filter(user=user, is_hidden=False)})
     return render(request, "index.html", {"user_tasks": user_tasks,
                                           "filter_completed": filter_completed})
 
@@ -113,6 +113,7 @@ def add_task(request):
     if request.method == "POST":
         task_form = AddTaskForm(data=request.POST)
         if task_form.is_valid():
+            import ipdb; ipdb.set_trace()
             task = task_form.save(commit=False)
             task.user = request.user
             task.save()
@@ -150,7 +151,9 @@ def edit_task(request, task_id):
             task = task_form.save(commit=False)
             # Get radio button values from POST data as we're re-using the
             # AddTaskForm
+            import ipdb; ipdb.set_trace()
             task.is_done = True if int(request.POST["task_status"]) else False
+            task.is_hidden = True if not int(request.POST["is_hidden"]) else False
             task.save()
             task_edited = True
         else:

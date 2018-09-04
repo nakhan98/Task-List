@@ -32,6 +32,15 @@ $(document).ready(function() {
       </p>
     </div>
 
+    <div class="radio">
+      <label><input type="radio" name="is_hidden" value="0" checked="checked">Visible to others</label>
+    </div>
+
+    <div class="radio">
+      <label><input type="radio" name="is_hidden" value="1">Invisible to others</label>
+    </div>
+
+
     {% if form_errors %}
     <p>{{form_errors}}</p>
     {% endif %}

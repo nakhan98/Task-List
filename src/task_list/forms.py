@@ -15,4 +15,4 @@ class AddTaskForm(forms.ModelForm):
     """Form for adding a Task"""
     class Meta:
         model = Task
-        fields = ("title", "description")
+        fields = ("title", "description", "is_hidden")
