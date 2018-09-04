@@ -151,7 +151,7 @@ def edit_task(request, task_id):
             # Get radio button values from POST data as we're re-using the
             # AddTaskForm
             task.is_done = True if int(request.POST["task_status"]) else False
-            task.is_hidden = True if not int(request.POST["is_hidden"]) else False
+            task.is_hidden = True if int(request.POST["is_hidden"]) else False
             task.save()
             task_edited = True
         else:
