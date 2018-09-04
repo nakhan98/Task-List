@@ -115,6 +115,7 @@ def add_task(request):
         if task_form.is_valid():
             task = task_form.save(commit=False)
             task.user = request.user
+            import ipdb; ipdb.set_trace()
             task.save()
             task_added = True
         else:

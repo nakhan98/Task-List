@@ -13,6 +13,9 @@ class UserForm(forms.ModelForm):
 
 class AddTaskForm(forms.ModelForm):
     """Form for adding a Task"""
+    is_hidden = forms.BooleanField(widget=forms.RadioSelect(
+        choices=[(True, '1'), (False, '0') ]), required=False)
+
     class Meta:
         model = Task
         fields = ("title", "description", "is_hidden")
