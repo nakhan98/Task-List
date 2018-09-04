@@ -27,8 +27,9 @@ $(document).ready(function() {
     
     <div class="form-group" >
       <p class="required"> <label for="id_description">Description:</label>
-      <input class="form-control" id="id_description" maxlength="30" name="description"
-      type="text" placeholder="Enter description"/></p>
+      <textarea class="form-control" id="id_description" name="description"
+          type="text" placeholder="Enter description"/></textarea>
+      </p>
     </div>
 
     {% if form_errors %}
