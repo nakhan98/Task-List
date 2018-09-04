@@ -140,11 +140,17 @@ def edit_task(request, task_id):
     # Avoid getting a SimpleLazyObject
     current_user = (request.user._wrapped if hasattr(request.user, '_wrapped')
                     else request.user)
-    if current_user != saved_task.user:
-        raise PermissionDenied
+
+    is_user_task_author = False
     task_edited = False
     form_errors = None
+
+    if current_user == saved_task.user:
+        is_user_task_author = True
+
     if request.method == "POST":
+        if not is_user_task_author:
+            raise PermissionDenied
         task_form = AddTaskForm(data=request.POST, instance=saved_task)
         if task_form.is_valid():
             task = task_form.save(commit=False)
@@ -162,7 +168,8 @@ def edit_task(request, task_id):
     return render(request, "edit_task.html", {"task_form": task_form,
                                               "task_edited": task_edited,
                                               "task": saved_task,
-                                              "form_errors": form_errors})
+                                              "form_errors": form_errors,
+                                              "is_user_task_author": is_user_task_author})
 
 
 @login_required

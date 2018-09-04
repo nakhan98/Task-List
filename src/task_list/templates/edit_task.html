@@ -32,48 +32,57 @@ $(document).ready(function() {
       </p>
     </div>
 
-    {% if task.is_done %}
-    <div class="radio">
-      <label><input type="radio" name="task_status" value="0">Task not done</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="task_status" value="1" checked="checked">Task done</label>
-    </div>
-    
-    {% else %}
-    <div class="radio">
-      <label><input type="radio" name="task_status" value="0" checked="checked">Task not done</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="task_status" value="1" >Task done</label>
-    </div>
-    {% endif %}
+    {% if is_user_task_author %}
 
-    <div></div>
+      {% if task.is_done %}
+      <div class="radio">
+        <label><input type="radio" name="task_status" value="0">Task not done</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="task_status" value="1" checked="checked">Task done</label>
+      </div>
 
-    {% if task.is_hidden %}
-    <div class="radio">
-      <label><input type="radio" name="is_hidden" value="0">Visible to others</label>
-    </div>
+      {% else %}
+      <div class="radio">
+        <label><input type="radio" name="task_status" value="0" checked="checked">Task not done</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="task_status" value="1" >Task done</label>
+      </div>
+      {% endif %}
 
-    <div class="radio">
-      <label><input type="radio" name="is_hidden" value="1" checked="checked">Invisible to others</label>
-    </div>
-    {%else %}
-    <div class="radio">
-      <label><input type="radio" name="is_hidden" value="0" checked="checked">Visible to others</label>
-    </div>
+      <div></div>
 
-    <div class="radio">
-      <label><input type="radio" name="is_hidden" value="1">Invisible to others</label>
-    </div>
+
+      {% if task.is_hidden %}
+      <div class="radio">
+        <label><input type="radio" name="is_hidden" value="0">Visible to others</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="is_hidden" value="1" checked="checked">Invisible to others</label>
+      </div>
+      {%else %}
+      <div class="radio">
+        <label><input type="radio" name="is_hidden" value="0" checked="checked">Visible to others</label>
+      </div>
+
+      <div class="radio">
+        <label><input type="radio" name="is_hidden" value="1">Invisible to others</label>
+      </div>
+      {% endif %}
+
     {% endif %}
 
     {% if form_errors %}
     <p>{{form_errors}}</p>
     {% endif %}
     
+    {% if is_user_task_author %}
     <button type="submit" class="btn btn-default">Submit</button>
+    {% else %}
+    <button disabled type="submit" class="btn btn-default">Submit</button>
+    {% endif %}
   </form>
 </div>
 {% endif %}
