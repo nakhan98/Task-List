@@ -2,16 +2,21 @@ version: "2"
 services:
 
     nginx:
+        mem_limit: 128m
         image: nginx:alpine
         ports:
             - "8443:8443"
         volumes:
             - ./nginx.conf:/etc/nginx/conf.d/task_list.conf:ro
-            - /home/nasef/docker_stuff/lets_encrypt/certs:/etc/letsencrypt/
+            - ../../docker_stuff/lets_encrypt/certs:/etc/letsencrypt/
+        depends_on:
+            - task-list
 
     task-list:
         build:
             context: .
+        volumes:
+            - ./src:/home/tester/task_list:rw
 
 networks:
   default:
