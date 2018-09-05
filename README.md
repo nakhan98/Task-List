@@ -1,12 +1,7 @@
 Task List App
 -------------
 
-A coding test I did a while back. Puting it her for posterity.
-
-General info
-============
-- Developed on Debian Jessie with Python 2.7.9 and Django (1.7.11).
-- Bootstrap and jQuery used for front end.
+A coding test I did a while back. Putting it up here and improving it.
 
 Setup
 =====
@@ -18,9 +13,7 @@ Setup
 
 Docker
 =====
-- Alternatively, run `start.sh` which dockerifies everything.
-    - By default, app will listen on port 48080.
-
+- Run docker-compose as usual (TODO: modify to remove ssl stuff)
 
 Instructions
 ============
