@@ -27,3 +27,8 @@ Instructions
   finished task (tooltip should provide username).
 - To edit a task click on the pencil glyph.
 - To delete a task click on the cross glyph.
+
+Demo
+====
+
+Demo available here: https://dev.nakhan.net:8443/task_list/
