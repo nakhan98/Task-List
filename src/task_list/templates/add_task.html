@@ -14,7 +14,7 @@ $(document).ready(function() {
 </script>
 
 {% else %}
-<div class="container" style="width:350px; margin-left:0">
+<div class="container" style="max-width:350px; margin-left:0">
   <form role="form"  method="post" action=".">
     {% csrf_token %}
     <h2 class="form-signin-heading">Add Task</h2>
