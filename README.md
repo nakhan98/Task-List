@@ -1,7 +1,9 @@
 Task List App
 -------------
 
-A coding test I did a while back. Putting it up here and improving it.
+A team-oriented task list web application.
+
+From a coding test I did a while back. Putting it up here and improving it.
 
 Setup
 =====
@@ -30,5 +32,4 @@ Instructions
 
 Demo
 ====
-
 Demo available here: https://dev.nakhan.net:8443/task_list/
