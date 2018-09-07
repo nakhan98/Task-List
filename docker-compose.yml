@@ -8,7 +8,7 @@ services:
             - "8443:8443"
         volumes:
             - ./nginx.conf:/etc/nginx/conf.d/task_list.conf:ro
-            - ../../docker_stuff/lets_encrypt/certs:/etc/letsencrypt/
+            - ../../docker_stuff/lets_encrypt/certs:/etc/letsencrypt/:ro
         depends_on:
             - task-list
 
